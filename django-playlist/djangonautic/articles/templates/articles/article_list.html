@@ -8,5 +8,18 @@
 </head>
 <body>
     <h1>Article List</h1>
+    <div class="articles">
+        <!-- Able to use articles data as it's references in views.py -->
+        <!-- Cycle through all articles with a for loop --> 
+        {% for article in articles %}
+        <div class="article">
+            <h2>
+                <a href="#">{{ article.title }}</a>
+            </h2>
+            <p>{{ article.body }}</p>
+            <p>{{ article.date }}</p>
+        </div>
+        {% endfor %}
+    </div>
 </body>
 </html>
