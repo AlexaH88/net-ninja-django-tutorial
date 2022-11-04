@@ -17,3 +17,8 @@ class Article(models.Model):
     # defines how an article is going to look (output)
     def __str__(self):
         return self.title
+
+    # add snippet model to show only a selection of the body text in article list view
+    def snippet(self):
+        # show only first 50 characters of the body string + ...
+        return self.body[:50] + '...'
