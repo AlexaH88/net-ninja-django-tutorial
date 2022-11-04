@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 # inherit basic functionality with the class Model from django's models method 
 class Article(models.Model):
     title = models.CharField(max_length=100)
@@ -11,4 +12,8 @@ class Article(models.Model):
     # time and date is automatically added thanks to parameter
     date = models.DateTimeField(auto_now_add=True)
     # add in thumbnail later
-    # add in author later    
+    # add in author later
+
+    # defines how an article is going to look (output)
+    def __str__(self):
+        return self.title
