@@ -11,7 +11,7 @@ class Article(models.Model):
     body = models.TextField()
     # time and date is automatically added thanks to parameter
     date = models.DateTimeField(auto_now_add=True)
-    # add in thumbnail later
+    thumb = models.ImageField(default='default.png', blank=True)
     # add in author later
 
     # defines how an article is going to look (output)
