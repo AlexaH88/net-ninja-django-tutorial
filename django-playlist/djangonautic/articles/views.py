@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Article
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -18,3 +19,10 @@ def article_detail(request, slug):
     return render(
         request, 'articles/article_detail.html', {'article': article}
         )
+
+
+# view will only run if user is logged in
+# and redirect the user to /accounts/login/ if not logged in
+@login_required(login_url="/accounts/login/")
+def article_create(request):
+    return render(request, 'articles/article_create.html')
