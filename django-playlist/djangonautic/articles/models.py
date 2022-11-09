@@ -1,4 +1,6 @@
 from django.db import models
+# import User model
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -12,7 +14,8 @@ class Article(models.Model):
     # time and date is automatically added thanks to parameter
     date = models.DateTimeField(auto_now_add=True)
     thumb = models.ImageField(default='default.png', blank=True)
-    # add in author later
+    # associate User model with Article model
+    author = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
 
     # defines how an article is going to look (output)
     def __str__(self):

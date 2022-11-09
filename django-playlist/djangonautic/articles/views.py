@@ -32,6 +32,12 @@ def article_create(request):
         form = forms.CreateArticle(request.POST, request.FILES)
         if form.is_valid():
             # save article to database
+            # save article to variable instance, and don't commit save yet to db
+            instance = form.save(commit=False)
+            # attach author to instance and make it equal to the logged in user via request
+            instance.author = request.user
+            # save instance, with author attached
+            instance.save()
             return redirect('articles:list')
     else:
         # create new instance of our CreateArticle form
