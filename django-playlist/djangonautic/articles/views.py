@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Article
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+# import forms.py file
+from . import forms
 
 
 # Create your views here.
@@ -25,4 +27,14 @@ def article_detail(request, slug):
 # and redirect the user to /accounts/login/ if not logged in
 @login_required(login_url="/accounts/login/")
 def article_create(request):
-    return render(request, 'articles/article_create.html')
+    if request.method == 'POST':
+        # request.FILES is required for file uploads
+        form = forms.CreateArticle(request.POST, request.FILES)
+        if form.is_valid():
+            # save article to database
+            return redirect('articles:list')
+    else:
+        # create new instance of our CreateArticle form
+        form = forms.CreateArticle()
+    # include form as third parameter, to be viewed by user
+    return render(request, 'articles/article_create.html', {'form': form})

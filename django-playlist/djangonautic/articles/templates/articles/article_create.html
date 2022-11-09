@@ -3,5 +3,13 @@
 {% block content %}
     <div class="create-article">
         <h2>Create an Awesome New Article</h2>
+        <!-- include enctype ="multipart/form-data" on form whever an upload field exists -->
+        <form class="site-form"action="{% url 'articles:create' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- render CreateArticle form on template (from view) -->
+            <!-- using form key name from render function -->
+            {{ form }}
+            <input type="submit" value="Create">
+        </form>
     </div>
 {% endblock %}
